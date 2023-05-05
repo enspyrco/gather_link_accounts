@@ -3,6 +3,8 @@
 <head>
   <meta name="google-signin-client_id" content="865555838574-u0iljl94nidbiitva2qujsf3063dore1.apps.googleusercontent.com">
 
+  <link rel="stylesheet" href="spinner.css">
+
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -29,6 +31,10 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  
+  <!-- Add a loading spinner in the center of the screen -->
+  <div id="centerOfScreen" class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
