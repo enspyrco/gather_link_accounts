@@ -3,6 +3,8 @@
 <head>
   <meta name="google-signin-client_id" content="865555838574-u0iljl94nidbiitva2qujsf3063dore1.apps.googleusercontent.com">
 
+  <link rel="stylesheet" href="spinner.css">
+
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -29,57 +31,22 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
-
-  <div id="loading">
-    <style>
-      body {
-        inset: 0; overflow: hidden;
-        margin: 0; padding: 0;
-        position: fixed;
-      }
-      #loading {
-        align-items: center;
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        width: 100%;
-      }
-      #loading img {
-        animation: 1s ease-in-out 0s infinite alternate breathe;
-        opacity: .66;
-        transition: opacity .4s;
-      }
-      #loading.main_done img {
-        opacity: 1;
-      }
-      #loading.init_done img {
-        animation: .33s ease-in-out 0s 1 forwards zooooom;
-        opacity: .05;
-      }
-      @keyframes breathe { from { transform: scale(1) } to { transform: scale(0.95)}}
-      @keyframes zooooom { from { transform: scale(1) } to { transform: scale(10)}}
-      </style>
-    <img src="icons/Icon-192.png" alt="Loading indicator..." />
-  </div>
+  
+  <!-- Add a loading spinner in the center of the screen -->
+  <div id="centerOfScreen" class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 
   <script>
     window.addEventListener('load', function(ev) {
-      var loading = document.querySelector('#loading');
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
         }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
-      }).then(function(app) {
-        // Wait a few milliseconds so users can see the "zoooom" animation
-        // before getting rid of the "loading" div.
-        window.setTimeout(function() {
-          loading.remove();
-        }, 200);
       });
     });
   </script>
