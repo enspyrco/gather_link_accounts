@@ -3,8 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../state/linking_state.dart';
 
-class GitHubButton extends StatelessWidget {
-  const GitHubButton({
+class GitHubSigninButton extends StatelessWidget {
+  const GitHubSigninButton({
     Key? key,
     required this.githubUri,
     required this.linkingState,

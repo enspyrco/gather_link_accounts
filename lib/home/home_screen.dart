@@ -32,23 +32,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    gatherNonce = Utils.generateNonce();
-    githubNonce = Utils.generateNonce();
-    var gatherRedirect = Uri.encodeComponent(
-        'https://gather-link-account-shelf-eogj3aa7na-uc.a.run.app/gather/?nonce=$gatherNonce&');
-    gatherUri =
-        Uri.parse('https://gather.town/getPublicId?redirectTo=$gatherRedirect');
-    githubUri = Uri.parse(
-        'https://github.com/login/oauth/authorize?client_id=3b2457d371c7b9b4a1b8&state=$githubNonce');
-    setNonceFuture = FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'gathernonce': gatherNonce, 'githubnonce': githubNonce},
-            SetOptions(merge: true));
-    docStream = FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots();
+    // final String gatherNonce = Utils.generateNonce();
+    // final String githubNonce = Utils.generateNonce();
+    // final String gatherRedirect = Uri.encodeComponent(
+    // 'https://gather-link-account-shelf-eogj3aa7na-uc.a.run.app/gather/?nonce=$gatherNonce&');
+    // final Uri gatherUri =
+    //     Uri.parse('https://gather.town/getPublicId?redirectTo=$gatherRedirect');
+    // final Uri githubUri = Uri.parse(
+    //     'https://github.com/login/oauth/authorize?client_id=3b2457d371c7b9b4a1b8&state=$githubNonce');
+    // setNonceFuture = FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(FirebaseAuth.instance.currentUser!.uid)
+    //     .set({'gathernonce': gatherNonce, 'githubnonce': githubNonce},
+    //         SetOptions(merge: true));
+    // docStream = FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(FirebaseAuth.instance.currentUser!.uid)
+    //     .snapshots();
   }
 
   @override
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return StreamBuilder<DocSnapshot>(
         stream: docStream,
         builder: (context, snapshot) {
-          print('$gatherState, $githubState');
+          // print('$gatherState, $githubState');
           if (snapshot.hasData && snapshot.data!.exists) {
             JsonMap docJson = snapshot.data!.data()!;
             gatherState = (docJson['gather'] == null)
@@ -83,9 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 100),
               GitHubButton(githubUri: githubUri, linkingState: githubState),
               const SizedBox(height: 150),
-              SizedBox(
+              const SizedBox(
                   width: 230,
-                  child: Row(children: const [
+                  child: Row(children: [
                     SignOutButton(),
                     Text('if you would like to start')
                   ])),
