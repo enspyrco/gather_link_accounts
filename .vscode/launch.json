@@ -1,12 +1,7 @@
 {
   "configurations": [
     {
-      "name": "gather_link_accounts",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "[web] gather_link_accounts",
+      "name": "[web] gather_link_accounts_flutter",
       "request": "launch",
       "type": "dart",
       "deviceId": "chrome"

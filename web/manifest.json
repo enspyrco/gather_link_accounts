@@ -1,6 +1,6 @@
 {
-    "name": "gather_link_accounts",
-    "short_name": "gather_link_accounts",
+    "name": "gather_link_accounts_flutter",
+    "short_name": "gather_link_accounts_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

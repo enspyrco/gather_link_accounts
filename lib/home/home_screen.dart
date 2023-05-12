@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../state/linking_state.dart';
-import '../utils/utils.dart';
 import 'buttons/gather_button.dart';
 import 'buttons/git_hub_button.dart';
 import 'buttons/sign_out_button.dart';

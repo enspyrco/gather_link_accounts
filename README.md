@@ -1,4 +1,4 @@
-# gather_link_accounts
+# gather_link_accounts_flutter
 
 Frontend app for linking Gather and other accounts.
 

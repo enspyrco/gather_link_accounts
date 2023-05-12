@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gather_link_accounts/auth/buttons/google_sign_in_button.dart';
+import 'package:gather_link_accounts_flutter/auth/buttons/google_sign_in_button.dart';
 
 import '../state/auth_state.dart';
 import 'buttons/gather_sign_in_button.dart';
