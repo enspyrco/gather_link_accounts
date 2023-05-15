@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../state/linking_state.dart';
+import '../../utils/utils.dart' as utils;
 
 class GitHubButton extends StatelessWidget {
-  const GitHubButton({
+  GitHubButton({
     Key? key,
-    required this.githubUri,
     required this.linkingState,
-  }) : super(key: key);
+  })  : _githubUri = utils.generateGithubUri(),
+        super(key: key);
 
-  final Uri githubUri;
+  final Uri _githubUri;
   final LinkingState linkingState;
 
   @override
@@ -21,10 +22,10 @@ class GitHubButton extends StatelessWidget {
           onPressed: linkingState.disabled
               ? null
               : () async {
-                  if (await canLaunchUrl(githubUri)) {
-                    await launchUrl(githubUri);
+                  if (await canLaunchUrl(_githubUri)) {
+                    await launchUrl(_githubUri);
                   } else {
-                    throw "Could not launch $githubUri";
+                    throw "Could not launch $_githubUri";
                   }
                 },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),

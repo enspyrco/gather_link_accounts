@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gather_link_accounts_flutter/auth/buttons/google_sign_in_button.dart';
 
 import '../state/auth_state.dart';
+import '../utils/utils.dart' as utils;
 import 'buttons/gather_sign_in_button.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen(this.authState, this.gatherNonce, {Key? key})
-      : super(key: key);
+  const AuthScreen(this.authState, {Key? key}) : super(key: key);
 
   final AuthState authState;
-  final String gatherNonce;
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -29,10 +28,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    final String gatherRedirect = Uri.encodeComponent(
-        'https://gather-link-account-shelf-eogj3aa7na-uc.a.run.app/gather/?nonce=${widget.gatherNonce}&');
-    _gatherUri =
-        Uri.parse('https://gather.town/getPublicId?redirectTo=$gatherRedirect');
+    _gatherUri = utils.generateGatherUri();
   }
 
   @override

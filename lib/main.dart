@@ -11,9 +11,6 @@ import 'home/home_screen.dart';
 import 'auth/auth_screen.dart';
 import 'auth/gather_sign_in_screen.dart';
 import 'state/auth_state.dart';
-import 'utils/utils.dart';
-
-final String gatherNonce = Utils.generateNonce();
 
 void main() async {
   usePathUrlStrategy();
@@ -35,7 +32,7 @@ final GoRouter _router = GoRouter(
           path: 'gather',
           builder: (BuildContext context, GoRouterState state) {
             final gatherToken = state.queryParameters['token'];
-            return GatherSignInScreen(gatherToken, gatherNonce);
+            return GatherSignInScreen(gatherToken);
           },
         ),
       ],
@@ -89,7 +86,7 @@ class _AuthGuardState extends State<AuthGuard> {
       home: Scaffold(
         body: switch (currentAuthState) {
           AuthState.signedIn => const HomeScreen(),
-          _ => AuthScreen(currentAuthState, gatherNonce),
+          _ => AuthScreen(currentAuthState),
         },
       ),
     );

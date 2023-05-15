@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../state/linking_state.dart';
+import '../../utils/utils.dart' as utils;
 
 class GatherButton extends StatelessWidget {
-  const GatherButton({
+  GatherButton({
     Key? key,
-    required this.gatherUri,
     required this.linkingState,
-  }) : super(key: key);
+  })  : _gatherUri = utils.generateGatherUri(),
+        super(key: key);
 
-  final Uri gatherUri;
+  final Uri _gatherUri;
+
   final LinkingState linkingState;
 
   @override
@@ -21,10 +23,10 @@ class GatherButton extends StatelessWidget {
         onPressed: linkingState.disabled
             ? null
             : () async {
-                if (await canLaunchUrl(gatherUri)) {
-                  await launchUrl(gatherUri);
+                if (await canLaunchUrl(_gatherUri)) {
+                  await launchUrl(_gatherUri);
                 } else {
-                  throw 'Could not launch $gatherUri';
+                  throw 'Could not launch $_gatherUri';
                 }
               },
         style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
