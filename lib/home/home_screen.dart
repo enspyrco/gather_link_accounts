@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../state/linking_state.dart';
-import 'buttons/gather_button.dart';
-import 'buttons/git_hub_button.dart';
+import '../state/linked_state.dart';
+import 'buttons/link_gather_button.dart';
+import 'buttons/link_git_hub_button.dart';
 import 'buttons/sign_out_button.dart';
 
 typedef JsonMap = Map<String, Object?>;
@@ -15,8 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  LinkingState gatherState = LinkingState.checking;
-  LinkingState githubState = LinkingState.checking;
+  LinkedState gatherLinkedState = LinkedState.checking;
+  LinkedState githubLinkedState = LinkedState.checking;
   final finishedText =
       'Your accounts have been linked!\n\nYou can now close this window and will\n'
       'soon be teleported into the first adventure...';
@@ -26,17 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Center(
       child: Column(
         children: [
-          if (githubState == LinkingState.linked &&
-              gatherState == LinkingState.linked) ...[
+          if (githubLinkedState == LinkedState.linked &&
+              gatherLinkedState == LinkedState.linked) ...[
             const SizedBox(height: 100),
             Text(finishedText),
           ],
           const SizedBox(height: 100),
-          GatherButton(linkingState: gatherState),
-          if (githubState != LinkingState.linked ||
-              gatherState != LinkingState.linked)
+          LinkGatherButton(linkingState: gatherLinkedState),
+          if (githubLinkedState != LinkedState.linked ||
+              gatherLinkedState != LinkedState.linked)
             const SizedBox(height: 100),
-          GitHubButton(linkingState: githubState),
+          LinkGitHubButton(linkingState: githubLinkedState),
           const SizedBox(height: 150),
           const SizedBox(
               width: 230,

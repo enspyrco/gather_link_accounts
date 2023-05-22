@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../state/linking_state.dart';
+import '../../state/linked_state.dart';
 import '../../utils/utils.dart' as utils;
 
-class GitHubButton extends StatelessWidget {
-  GitHubButton({
+class LinkGitHubButton extends StatelessWidget {
+  LinkGitHubButton({
     Key? key,
     required this.linkingState,
   })  : _githubUri = utils.generateGithubUri(),
         super(key: key);
 
   final Uri _githubUri;
-  final LinkingState linkingState;
+  final LinkedState linkingState;
 
   @override
   Widget build(BuildContext context) {
