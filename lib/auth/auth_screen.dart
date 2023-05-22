@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gather_link_accounts_flutter/auth/buttons/google_sign_in_button.dart';
 
 import '../state/auth_state.dart';
-import '../utils/utils.dart' as utils;
 import 'buttons/gather_sign_in_button.dart';
+import 'buttons/git_hub_sign_in_button.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen(this.authState, {Key? key}) : super(key: key);
@@ -17,7 +17,6 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool enabled = true;
   Object? error;
-  late Uri _gatherUri;
   final explanation =
       'In order to link your Gather account with other accounts such as GitHub,'
       ' we create a section in a database that only this Google account can access.\n\n'
@@ -28,7 +27,6 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    _gatherUri = utils.generateGatherUri();
   }
 
   @override
@@ -44,9 +42,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       widget.authState == AuthState.signingIn)
                     const CircularProgressIndicator()
                   else ...[
-                    GatherSignInButton(_gatherUri),
+                    GatherSignInButton(),
                     const SizedBox(height: 50),
-                    const GoogleSignInButton(),
+                    GitHubSignInButton(),
                     const SizedBox(height: 50),
                     const GoogleSignInButton(),
                   ],

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class GatherSignInButton extends StatelessWidget {
-  const GatherSignInButton(
-    this.gatherUri, {
-    Key? key,
-  }) : super(key: key);
+import '../../utils/utils.dart' as utils;
 
-  final Uri gatherUri;
+class GatherSignInButton extends StatelessWidget {
+  GatherSignInButton({Key? key})
+      : _gatherUri = utils.generateGatherUri(),
+        super(key: key);
+
+  final Uri _gatherUri;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,10 @@ class GatherSignInButton extends StatelessWidget {
       width: 200,
       child: ElevatedButton(
         onPressed: () async {
-          if (await canLaunchUrl(gatherUri)) {
-            await launchUrl(gatherUri);
+          if (await canLaunchUrl(_gatherUri)) {
+            await launchUrl(_gatherUri);
           } else {
-            throw 'Could not launch $gatherUri';
+            throw 'Could not launch $_gatherUri';
           }
         },
         style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
