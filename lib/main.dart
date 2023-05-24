@@ -85,7 +85,8 @@ class _AuthGuardState extends State<AuthGuard> {
     return MaterialApp(
       home: Scaffold(
         body: switch (currentAuthState) {
-          SignedInState.completed => const HomeScreen(),
+          SignedInState.completed =>
+            HomeScreen(FirebaseAuth.instance.currentUser!),
           _ => AuthScreen(currentAuthState),
         },
       ),
