@@ -7,7 +7,7 @@ class GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
+      width: 200,
       child: TextButton(
         onPressed: () =>
             FirebaseAuth.instance.signInWithPopup(GoogleAuthProvider()),

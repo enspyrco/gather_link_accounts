@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../state/linking_state.dart';
+import '../../state/linked_state.dart';
 import '../../utils/utils.dart' as utils;
 
-class GatherButton extends StatelessWidget {
-  GatherButton({
+class LinkGatherButton extends StatelessWidget {
+  LinkGatherButton({
     Key? key,
     required this.linkingState,
   })  : _gatherUri = utils.generateGatherUri(),
@@ -13,7 +13,7 @@ class GatherButton extends StatelessWidget {
 
   final Uri _gatherUri;
 
-  final LinkingState linkingState;
+  final LinkedState linkingState;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class GatherButton extends StatelessWidget {
               '${linkingState.buttonText}Gather',
               style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: (linkingState == LinkingState.linked)
+                  color: (linkingState == LinkedState.linked)
                       ? const Color.fromARGB(255, 129, 204, 248)
                       : const Color.fromARGB(200, 5, 73, 255)),
             ),

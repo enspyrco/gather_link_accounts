@@ -9,8 +9,8 @@ import 'package:go_router/go_router.dart';
 import 'firebase_options.dart';
 import 'home/home_screen.dart';
 import 'auth/auth_screen.dart';
-import 'auth/gather_sign_in_screen.dart';
-import 'state/auth_state.dart';
+import 'perform_gather_sign_in_screen.dart';
+import 'state/signed_in_state.dart';
 
 void main() async {
   usePathUrlStrategy();
@@ -32,7 +32,7 @@ final GoRouter _router = GoRouter(
           path: 'gather',
           builder: (BuildContext context, GoRouterState state) {
             final gatherToken = state.queryParameters['token'];
-            return GatherSignInScreen(gatherToken);
+            return PerformGatherSignInScreen(gatherToken);
           },
         ),
       ],
@@ -61,7 +61,7 @@ class AuthGuard extends StatefulWidget {
 
 class _AuthGuardState extends State<AuthGuard> {
   StreamSubscription<User?>? authStateSubscription;
-  AuthState currentAuthState = AuthState.checking;
+  SignedInState currentAuthState = SignedInState.checking;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _AuthGuardState extends State<AuthGuard> {
         FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (!mounted) return;
       setState(() => currentAuthState =
-          (user == null) ? AuthState.notSignedIn : AuthState.signedIn);
+          (user == null) ? SignedInState.notSignedIn : SignedInState.completed);
     });
   }
 
@@ -85,7 +85,8 @@ class _AuthGuardState extends State<AuthGuard> {
     return MaterialApp(
       home: Scaffold(
         body: switch (currentAuthState) {
-          AuthState.signedIn => const HomeScreen(),
+          SignedInState.completed =>
+            HomeScreen(FirebaseAuth.instance.currentUser!),
           _ => AuthScreen(currentAuthState),
         },
       ),

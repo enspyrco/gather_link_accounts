@@ -1,37 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../state/linking_state.dart';
+import '../../utils/utils.dart' as utils;
 
-class GitHubSigninButton extends StatelessWidget {
-  const GitHubSigninButton({
+class GitHubSignInButton extends StatefulWidget {
+  GitHubSignInButton({
     Key? key,
-    required this.githubUri,
-    required this.linkingState,
-  }) : super(key: key);
+  })  : _githubUri = utils.generateGithubUri(),
+        super(key: key);
 
-  final Uri githubUri;
-  final LinkingState linkingState;
+  final Uri _githubUri;
+
+  @override
+  State<GitHubSignInButton> createState() => _GitHubSignInButtonState();
+}
+
+class _GitHubSignInButtonState extends State<GitHubSignInButton> {
+  bool _signingIn = false;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 200,
       child: ElevatedButton(
-          onPressed: linkingState.disabled
+          onPressed: _signingIn // disable while signing in
               ? null
               : () async {
-                  if (await canLaunchUrl(githubUri)) {
-                    await launchUrl(githubUri);
+                  if (await canLaunchUrl(widget._githubUri)) {
+                    setState(() {
+                      _signingIn = true;
+                    });
+                    await launchUrl(widget._githubUri);
                   } else {
-                    throw "Could not launch $githubUri";
+                    throw "Could not launch ${widget._githubUri}";
                   }
                 },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
-              '${linkingState.buttonText}GitHub',
+              _signingIn ? 'Signing in...' : 'Sign in with GitHub',
               style: const TextStyle(
                   fontWeight: FontWeight.w400, color: Colors.white),
             ),
