@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'firebase_options.dart';
 import 'home/home_screen.dart';
 import 'auth/auth_screen.dart';
-import 'auth/perform_gather_sign_in_screen.dart';
+import 'perform_gather_sign_in_screen.dart';
 import 'state/signed_in_state.dart';
 
 void main() async {
