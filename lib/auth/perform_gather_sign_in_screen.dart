@@ -4,16 +4,18 @@ import 'dart:html';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class GatherSignInScreen extends StatefulWidget {
-  const GatherSignInScreen(this.gatherToken, {Key? key}) : super(key: key);
+class PerformGatherSignInScreen extends StatefulWidget {
+  const PerformGatherSignInScreen(this.gatherToken, {Key? key})
+      : super(key: key);
 
   final String? gatherToken;
 
   @override
-  State<GatherSignInScreen> createState() => _GatherSignInScreenState();
+  State<PerformGatherSignInScreen> createState() =>
+      _PerformGatherSignInScreenState();
 }
 
-class _GatherSignInScreenState extends State<GatherSignInScreen> {
+class _PerformGatherSignInScreenState extends State<PerformGatherSignInScreen> {
   bool enabled = true;
   bool finished = false;
   Object? error;
